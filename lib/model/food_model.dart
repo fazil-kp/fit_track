@@ -1,47 +1,27 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive/hive.dart';
 
-class Food {
-  final String label;
-  final double calories;
-  final double protein;
-  final double fat;
-  final double carbs;
-  final double sugar;
-  final double fiber;
-  final double servingSize;
-  final double sodium;
-  final double potassium;
-  final double saturatedFat;
-  final double cholesterol;
+part '../gen/food_model.freezed.dart';
+part '../gen/food_model.g.dart';
+// part '../gen/food_model.hive.g.dart';
 
-  Food({
-    required this.label,
-    required this.calories,
-    required this.protein,
-    required this.fat,
-    required this.carbs,
-    required this.sugar,
-    required this.fiber,
-    required this.servingSize,
-    required this.sodium,
-    required this.potassium,
-    required this.saturatedFat,
-    required this.cholesterol,
-  });
+@freezed
+@HiveType(typeId: 0)
+class Food with _$Food {
+  const factory Food({
+    @HiveField(0) @JsonKey(name: 'name', defaultValue: 'Unknown') String? label,
+    @HiveField(1) @JsonKey(defaultValue: 0.0) required double? calories,
+    @HiveField(2) @JsonKey(name: 'protein_g', defaultValue: 0.0) double? protein,
+    @HiveField(3) @JsonKey(name: 'fat_total_g', defaultValue: 0.0) double? fat,
+    @HiveField(4) @JsonKey(name: 'carbohydrates_total_g', defaultValue: 0.0) double? carbs,
+    @HiveField(5) @JsonKey(name: 'sugar_g', defaultValue: 0.0) double? sugar,
+    @HiveField(6) @JsonKey(name: 'fiber_g', defaultValue: 0.0) double? fiber,
+    @HiveField(7) @JsonKey(name: 'serving_size_g', defaultValue: 0.0) double? servingSize,
+    @HiveField(8) @JsonKey(name: 'sodium_mg', defaultValue: 0.0) double? sodium,
+    @HiveField(9) @JsonKey(name: 'potassium_mg', defaultValue: 0.0) double? potassium,
+    @HiveField(10) @JsonKey(name: 'fat_saturated_g', defaultValue: 0.0) double? saturatedFat,
+    @HiveField(11) @JsonKey(name: 'cholesterol_mg', defaultValue: 0.0) double? cholesterol,
+  }) = _Food;
 
-  factory Food.fromJson(Map<String, dynamic> json) {
-    return Food(
-      label: json['name'] ?? 'Unknown',
-      calories: (json['calories'] ?? 0.0).toDouble(),
-      protein: (json['protein_g'] ?? 0.0).toDouble(),
-      fat: (json['fat_total_g'] ?? 0.0).toDouble(),
-      carbs: (json['carbohydrates_total_g'] ?? 0.0).toDouble(),
-      sugar: (json['sugar_g'] ?? 0.0).toDouble(),
-      fiber: (json['fiber_g'] ?? 0.0).toDouble(),
-      servingSize: (json['serving_size_g'] ?? 0.0).toDouble(),
-      sodium: (json['sodium_mg'] ?? 0.0).toDouble(),
-      potassium: (json['potassium_mg'] ?? 0.0).toDouble(),
-      saturatedFat: (json['fat_saturated_g'] ?? 0.0).toDouble(),
-      cholesterol: (json['cholesterol_mg'] ?? 0.0).toDouble(),
-    );
-  }
+  factory Food.fromJson(Map<String, dynamic> json) => _$FoodFromJson(json);
 }

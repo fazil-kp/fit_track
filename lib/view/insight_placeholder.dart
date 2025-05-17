@@ -8,11 +8,12 @@ import 'package:flutter/material.dart';
 
 class FitTrackPlaceHolder extends StatelessWidget {
   final Widget? child;
+  final Widget? floatingActionButton;
   final String? title;
   final bool? enableSafeArea;
   final bool? enableBackButton;
   final bool? enableBottomNav;
-  const FitTrackPlaceHolder({super.key, this.child, this.enableSafeArea = true, this.enableBottomNav = true, this.title, this.enableBackButton = true});
+  const FitTrackPlaceHolder({super.key, this.child, this.enableSafeArea = true, this.enableBottomNav = true, this.title, this.enableBackButton = true, this.floatingActionButton});
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +44,7 @@ class FitTrackPlaceHolder extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: floatingActionButton,
       bottomNavigationBar: enableBottomNav ?? true ? BottomNavSection() : null,
     );
   }
