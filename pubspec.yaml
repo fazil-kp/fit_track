@@ -1,0 +1,64 @@
+name: fit_track
+description: "A new Flutter project."
+publish_to: 'none' 
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  hive: ^2.2.3
+  go_router: ^14.4.1
+  dio: ^5.8.0+1
+  freezed_annotation: ^2.4.4
+  source_gen: ^1.5.0
+  flutter_svg: ^2.0.17
+  flutter_hooks: ^0.20.5
+  fluttertoast: ^8.2.12
+  flutter_riverpod: ^2.6.1
+  fl_chart: ^0.71.0
+  intl: ^0.20.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: 
+  json_annotation: 
+  build_runner:
+  json_serializable: 
+  freezed: 
+
+flutter:
+  uses-material-design: true
+  
+  assets:
+    - assets/
+    - assets/images/
+    - assets/icons/
+    
+
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Inter-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Inter-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Inter-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Inter-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Inter-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Inter-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Inter-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Inter-Thin.ttf
+          weight: 100
