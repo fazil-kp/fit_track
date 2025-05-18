@@ -10,7 +10,7 @@ class NoRouteScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(gradient: LinearGradient(colors: [Colors.red, Colors.white], begin: Alignment.topLeft, end: Alignment.bottomRight)),
+        decoration: const BoxDecoration(gradient: LinearGradient(colors: [Colors.red, Colors.white], begin: Alignment.topLeft, end: Alignment.bottomRight)),
         child: Card(
           color: Colors.white,
           elevation: 8,
@@ -22,7 +22,7 @@ class NoRouteScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.error_outline, size: 100, color: Colors.red),
+                const Icon(Icons.error_outline, size: 100, color: Colors.red),
                 const SizedBox(height: 20),
                 const Text("Oops! Something went wrong.", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
                 const SizedBox(height: 10),

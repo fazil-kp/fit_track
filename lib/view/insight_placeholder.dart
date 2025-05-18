@@ -40,12 +40,12 @@ class FitTrackPlaceHolder extends StatelessWidget {
                   ),
                 ),
               ),
-            Expanded(child: Container(decoration: BoxDecoration(color: scaffoldColor), child: child ?? FoodSearchScreen())),
+            Expanded(child: Container(decoration: BoxDecoration(color: scaffoldColor), child: child ?? const FoodSearchScreen())),
           ],
         ),
       ),
       floatingActionButton: floatingActionButton,
-      bottomNavigationBar: enableBottomNav ?? true ? BottomNavSection() : null,
+      bottomNavigationBar: enableBottomNav ?? true ? const BottomNavSection() : null,
     );
   }
 }

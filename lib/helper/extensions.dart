@@ -1,6 +1,11 @@
 import 'package:fit_track/helper/responsive_helper.dart';
 import 'package:flutter/material.dart';
 
+// Extension for cleaner date comparisons
+extension DateTimeExtension on DateTime {
+  bool isSameDay(DateTime other) => year == other.year && month == other.month && day == other.day;
+}
+
 extension WidgetExtensions on Widget {
   /// Center the widget
   Widget center() {

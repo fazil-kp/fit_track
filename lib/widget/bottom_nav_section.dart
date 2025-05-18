@@ -11,7 +11,7 @@ class BottomNavSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: scaffoldColor, border: Border(top: BorderSide(color: inactiveBorder)), boxShadow: [BoxShadow(color: background, blurRadius: 2, spreadRadius: 1, offset: Offset(0, -3))]),
+      decoration: BoxDecoration(color: scaffoldColor, border: Border(top: BorderSide(color: inactiveBorder)), boxShadow: [BoxShadow(color: background, blurRadius: 2, spreadRadius: 1, offset: const Offset(0, -3))]),
       child: BottomNavigationBar(
         backgroundColor: primary,
         selectedItemColor: whiteColor,

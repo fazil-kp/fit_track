@@ -152,7 +152,7 @@ class _FoodSearchScreenState extends ConsumerState<FoodSearchScreen> with Single
             end: Alignment.bottomCenter,
             colors: [
               colorScheme.primaryContainer.withOpacity(0.5),
-              colorScheme.background,
+              colorScheme.surface,
             ],
           ),
         ),
@@ -320,14 +320,14 @@ class _FoodSearchScreenState extends ConsumerState<FoodSearchScreen> with Single
                                   Text(
                                     'No foods found',
                                     style: theme.textTheme.titleLarge?.copyWith(
-                                      color: colorScheme.onBackground,
+                                      color: colorScheme.onSurface,
                                     ),
                                   ),
                                   const SizedBox(height: 8),
                                   Text(
                                     'Try searching for something else',
                                     style: theme.textTheme.bodyMedium?.copyWith(
-                                      color: colorScheme.onBackground.withOpacity(0.7),
+                                      color: colorScheme.onSurface.withOpacity(0.7),
                                     ),
                                   ),
                                 ],
@@ -741,7 +741,7 @@ class _FoodSearchScreenState extends ConsumerState<FoodSearchScreen> with Single
             Container(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
               decoration: BoxDecoration(
-                color: colorScheme.surfaceVariant.withOpacity(0.5),
+                color: colorScheme.surfaceContainerHighest.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Row(
@@ -749,7 +749,7 @@ class _FoodSearchScreenState extends ConsumerState<FoodSearchScreen> with Single
                 children: [
                   _buildMainNutrientInfo(
                     'Calories',
-                    '${food.calories?.toStringAsFixed(0) ?? "N/A"}',
+                    food.calories?.toStringAsFixed(0) ?? "N/A",
                     'kcal',
                     Icons.local_fire_department,
                     Colors.redAccent,
@@ -758,7 +758,7 @@ class _FoodSearchScreenState extends ConsumerState<FoodSearchScreen> with Single
                   _buildDivider(),
                   _buildMainNutrientInfo(
                     'Protein',
-                    '${food.protein?.toStringAsFixed(1) ?? "N/A"}',
+                    food.protein?.toStringAsFixed(1) ?? "N/A",
                     'g',
                     Icons.fitness_center,
                     Colors.purpleAccent,
@@ -767,7 +767,7 @@ class _FoodSearchScreenState extends ConsumerState<FoodSearchScreen> with Single
                   _buildDivider(),
                   _buildMainNutrientInfo(
                     'Carbs',
-                    '${food.carbs?.toStringAsFixed(1) ?? "N/A"}',
+                    food.carbs?.toStringAsFixed(1) ?? "N/A",
                     'g',
                     Icons.grain,
                     Colors.amberAccent,
@@ -776,7 +776,7 @@ class _FoodSearchScreenState extends ConsumerState<FoodSearchScreen> with Single
                   _buildDivider(),
                   _buildMainNutrientInfo(
                     'Fat',
-                    '${food.fat?.toStringAsFixed(1) ?? "N/A"}',
+                    food.fat?.toStringAsFixed(1) ?? "N/A",
                     'g',
                     Icons.opacity,
                     Colors.blueAccent,

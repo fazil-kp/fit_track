@@ -95,7 +95,7 @@ class MealLogScreen extends ConsumerWidget {
                       Expanded(
                         child: _NutritionCard(
                           title: 'Calories',
-                          value: '${totalCalories.toStringAsFixed(0)}',
+                          value: totalCalories.toStringAsFixed(0),
                           unit: 'kcal',
                           icon: Icons.local_fire_department,
                           color: Colors.orange,
@@ -105,7 +105,7 @@ class MealLogScreen extends ConsumerWidget {
                       Expanded(
                         child: _NutritionCard(
                           title: 'Protein',
-                          value: '${totalProtein.toStringAsFixed(0)}',
+                          value: totalProtein.toStringAsFixed(0),
                           unit: 'g',
                           icon: Icons.fitness_center,
                           color: Colors.blue,
