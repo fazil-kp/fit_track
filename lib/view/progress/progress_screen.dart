@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:fit_track/config/colors.dart';
 import 'package:fit_track/helper/extensions.dart';
 import 'package:fit_track/model/meal_log_model.dart';
@@ -79,32 +81,6 @@ final mealCategoryMacrosProvider = Provider<Map<String, Map<String, double>>>((r
   return categories;
 });
 
-// Define theme colors
-class AppColors {
-  static const Color primary = Color(0xFF297959); // New primary color as requested
-  static const Color primaryLight = Color(0xFF3A8A69); // Lighter shade of primary
-  static const Color primaryDark = Color(0xFF1F5D43); // Darker shade of primary
-  static const Color accent = Color(0xFF4CAF50); // Complementary green
-  static const Color accentLight = Color(0xFF81C784); 
-  static const Color textDark = Color(0xFF333333);
-  static const Color textMedium = Color(0xFF666666);
-  static const Color textLight = Color(0xFFFFFFFF);
-  static const Color background = Color(0xFFFFFFFF); // White background as requested
-  static const Color cardBackground = Color(0xFFF5F5F5); // Light grey for cards
-
-  // Chart colors
-  static const Color calories = Color(0xFF297959); // Primary color
-  static const Color protein = Color(0xFF4285F4); // Blue
-  static const Color fat = Color(0xFFFFA000); // Amber
-  static const Color carbs = Color(0xFFDB4437); // Red
-
-  // Meal category colors
-  static const Color breakfast = Color(0xFFFF9800); // Orange
-  static const Color lunch = Color(0xFF4285F4); // Blue
-  static const Color dinner = Color(0xFF297959); // Primary green
-  static const Color snacks = Color(0xFF9C27B0); // Purple
-}
-
 class ProgressScreen extends ConsumerStatefulWidget {
   const ProgressScreen({super.key});
 
@@ -115,7 +91,7 @@ class ProgressScreen extends ConsumerStatefulWidget {
 class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final PageController _pageController = PageController();
-  int _currentIndex = 0;
+  int currentIndex = 0;
 
   @override
   void initState() {
@@ -129,7 +105,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
           curve: Curves.easeInOut,
         );
         setState(() {
-          _currentIndex = _tabController.index;
+          currentIndex = _tabController.index;
         });
       }
     });
@@ -144,7 +120,6 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
     final todayNutrition = ref.watch(todayNutritionProvider);
     final weeklyCalories = ref.watch(weeklyCaloriesProvider);
     final mealCategoryCalories = ref.watch(mealCategoryCaloriesProvider);
@@ -161,192 +136,179 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
     final dayName = DateFormat('EEEE').format(today);
     final dateFormatted = DateFormat('MMMM d, y').format(today);
 
-    return Scaffold(
-      backgroundColor: AppColors.background, // White background
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Custom App Bar
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-              decoration: BoxDecoration(
-                color: AppColors.background,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    spreadRadius: 1,
-                    blurRadius: 3,
-                    offset: const Offset(0, 1),
-                  ),
-                ],
+    return Column(
+      children: [
+        // Custom App Bar
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+          decoration: BoxDecoration(
+            color: AppColors.background,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.1),
+                spreadRadius: 1,
+                blurRadius: 3,
+                offset: const Offset(0, 1),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Nutrition Progress',
-                        style: TextStyle(
-                          color: AppColors.textDark,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        '$dayName • $dateFormatted',
-                        style: TextStyle(
-                          color: AppColors.textMedium,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
+                  const Text(
+                    'Nutrition Progress',
+                    style: TextStyle(
+                      color: AppColors.textDark,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  CircleAvatar(
-                    backgroundColor: AppColors.primary,
-                    radius: 22,
-                    child: Icon(
-                      Icons.person,
-                      color: AppColors.textLight,
-                      size: 24,
+                  Text(
+                    '$dayName • $dateFormatted',
+                    style: const TextStyle(
+                      color: AppColors.textMedium,
+                      fontSize: 14,
                     ),
                   ),
                 ],
               ),
-            ),
-
-            // Daily Nutrition Summary
-            Container(
-              margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    AppColors.primary,
-                    AppColors.primaryLight,
-                  ],
-                ),
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.primary.withOpacity(0.3),
-                    blurRadius: 10,
-                    offset: const Offset(0, 5),
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Today\'s Summary',
-                        style: TextStyle(
-                          color: AppColors.textLight,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Icon(
-                        Icons.insights,
-                        color: AppColors.textLight,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 15),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      _buildNutrientSummary(
-                        'Calories',
-                        totalCalories.toStringAsFixed(0),
-                        'kcal',
-                        AppColors.calories,
-                      ),
-                      _buildNutrientSummary(
-                        'Protein',
-                        totalProtein.toStringAsFixed(0),
-                        'g',
-                        AppColors.protein,
-                      ),
-                      _buildNutrientSummary(
-                        'Carbs',
-                        totalCarbs.toStringAsFixed(0),
-                        'g',
-                        AppColors.carbs,
-                      ),
-                      _buildNutrientSummary(
-                        'Fat',
-                        totalFat.toStringAsFixed(0),
-                        'g',
-                        AppColors.fat,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-
-            Container(
-              margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-              decoration: BoxDecoration(
-                color: AppColors.background,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    spreadRadius: 1,
-                    blurRadius: 3,
-                    offset: const Offset(0, 1),
-                  ),
-                ],
-              ),
-              child: TabBar(
-                controller: _tabController,
-                indicatorColor: AppColors.primary,
-                labelColor: AppColors.primary,
-                unselectedLabelColor: AppColors.textMedium,
-                tabs: const [
-                  Tab(icon: Icon(Icons.insights), text: 'Overview'),
-                  Tab(icon: Icon(Icons.calendar_today), text: 'Weekly'),
-                  Tab(icon: Icon(Icons.fitness_center), text: 'Macros'),
-                  Tab(icon: Icon(Icons.restaurant_menu), text: 'Meals'),
-                ],
-              ),
-            ),
-
-            // Page Content
-            Expanded(
-              child: PageView(
-                controller: _pageController,
-                onPageChanged: (index) {
-                  setState(() {
-                    _currentIndex = index;
-                    _tabController.animateTo(index);
-                  });
-                },
-                children: [
-                  // Overview Page
-                  _buildOverviewPage(todayNutrition),
-
-                  // Weekly Page
-                  _buildWeeklyPage(weeklyCalories),
-
-                  // Macros Page
-                  _buildMacrosPage(totalProtein, totalCarbs, totalFat),
-
-                  // Meals Page
-                  _buildMealsPage(mealCategoryCalories, mealCategoryMacros),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
+
+        // Daily Nutrition Summary
+        Container(
+          margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                AppColors.primary,
+                AppColors.primaryLight,
+              ],
+            ),
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.primary.withOpacity(0.3),
+                blurRadius: 10,
+                offset: const Offset(0, 5),
+              ),
+            ],
+          ),
+          child: Column(
+            children: [
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Today\'s Summary',
+                    style: TextStyle(
+                      color: AppColors.textLight,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Icon(
+                    Icons.insights,
+                    color: AppColors.textLight,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _buildNutrientSummary(
+                    'Calories',
+                    totalCalories.toStringAsFixed(0),
+                    'kcal',
+                    AppColors.calories,
+                  ),
+                  _buildNutrientSummary(
+                    'Protein',
+                    totalProtein.toStringAsFixed(0),
+                    'g',
+                    AppColors.protein,
+                  ),
+                  _buildNutrientSummary(
+                    'Carbs',
+                    totalCarbs.toStringAsFixed(0),
+                    'g',
+                    AppColors.carbs,
+                  ),
+                  _buildNutrientSummary(
+                    'Fat',
+                    totalFat.toStringAsFixed(0),
+                    'g',
+                    AppColors.fat,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+
+        Container(
+          margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+          decoration: BoxDecoration(
+            color: AppColors.background,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.1),
+                spreadRadius: 1,
+                blurRadius: 3,
+                offset: const Offset(0, 1),
+              ),
+            ],
+          ),
+          child: TabBar(
+            controller: _tabController,
+            indicatorColor: AppColors.primary,
+            dividerColor: whiteColor,
+            labelColor: AppColors.primary,
+            unselectedLabelColor: AppColors.textMedium,
+            tabs: const [
+              Tab(icon: Icon(Icons.insights), text: 'Overview'),
+              Tab(icon: Icon(Icons.calendar_today), text: 'Weekly'),
+              Tab(icon: Icon(Icons.fitness_center), text: 'Macros'),
+              Tab(icon: Icon(Icons.restaurant_menu), text: 'Meals'),
+            ],
+          ),
+        ),
+
+        // Page Content
+        Expanded(
+          child: PageView(
+            controller: _pageController,
+            onPageChanged: (index) {
+              setState(() {
+                currentIndex = index;
+                _tabController.animateTo(index);
+              });
+            },
+            children: [
+              // Overview Page
+              _buildOverviewPage(todayNutrition),
+
+              // Weekly Page
+              _buildWeeklyPage(weeklyCalories),
+
+              // Macros Page
+              _buildMacrosPage(totalProtein, totalCarbs, totalFat),
+
+              // Meals Page
+              _buildMealsPage(mealCategoryCalories, mealCategoryMacros),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
@@ -382,7 +344,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
         const SizedBox(height: 6),
         Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             color: AppColors.textLight,
             fontSize: 12,
             fontWeight: FontWeight.w500,
@@ -425,7 +387,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                             final value = rod.toY.toStringAsFixed(0);
                             return BarTooltipItem(
                               '${labels[group.x]}\n$value ${units[group.x]}',
-                              TextStyle(
+                              const TextStyle(
                                 color: AppColors.textLight,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 14,
@@ -440,20 +402,20 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                           sideTitles: SideTitles(
                             showTitles: true,
                             getTitlesWidget: (value, meta) {
-                              final style = TextStyle(
+                              const style = TextStyle(
                                 color: AppColors.textDark,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 12,
                               );
                               switch (value.toInt()) {
                                 case 0:
-                                  return Text('Calories', style: style);
+                                  return const Text('Calories', style: style);
                                 case 1:
-                                  return Text('Protein', style: style);
+                                  return const Text('Protein', style: style);
                                 case 2:
-                                  return Text('Fat', style: style);
+                                  return const Text('Fat', style: style);
                                 case 3:
-                                  return Text('Carbs', style: style);
+                                  return const Text('Carbs', style: style);
                                 default:
                                   return const Text('');
                               }
@@ -467,7 +429,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                             getTitlesWidget: (value, meta) {
                               return Text(
                                 value.toInt().toString(),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: AppColors.textDark,
                                   fontSize: 12,
                                 ),
@@ -628,7 +590,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                               );
                               return LineTooltipItem(
                                 '$day\n${spot.y.toStringAsFixed(0)} kcal',
-                                TextStyle(
+                                const TextStyle(
                                   color: AppColors.textLight,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14,
@@ -663,7 +625,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                                 padding: const EdgeInsets.only(top: 8.0),
                                 child: Text(
                                   day,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: AppColors.textDark,
                                     fontSize: 12,
                                     fontWeight: FontWeight.bold,
@@ -680,7 +642,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                             getTitlesWidget: (value, meta) {
                               return Text(
                                 value.toInt().toString(),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: AppColors.textDark,
                                   fontSize: 12,
                                 ),
@@ -764,13 +726,14 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
       ],
     );
   }
+
 // Macros Page Content - continuing from where the code was cut off
   Widget _buildMacrosPage(double totalProtein, double totalCarbs, double totalFat) {
     final totalMacros = totalProtein + totalCarbs + totalFat;
     final proteinPercentage = totalMacros > 0 ? (totalProtein / totalMacros * 100).toStringAsFixed(1) : '0';
     final carbsPercentage = totalMacros > 0 ? (totalCarbs / totalMacros * 100).toStringAsFixed(1) : '0';
     final fatPercentage = totalMacros > 0 ? (totalFat / totalMacros * 100).toStringAsFixed(1) : '0';
-    
+
     return ListView(
       padding: const EdgeInsets.all(20),
       children: [
@@ -793,7 +756,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                               title: '$proteinPercentage%',
                               color: AppColors.protein,
                               radius: 80,
-                              titleStyle: TextStyle(
+                              titleStyle: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: AppColors.textLight,
@@ -804,7 +767,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                               title: '$carbsPercentage%',
                               color: AppColors.carbs,
                               radius: 80,
-                              titleStyle: TextStyle(
+                              titleStyle: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: AppColors.textLight,
@@ -815,7 +778,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                               title: '$fatPercentage%',
                               color: AppColors.fat,
                               radius: 80,
-                              titleStyle: TextStyle(
+                              titleStyle: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: AppColors.textLight,
@@ -889,7 +852,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
         const SizedBox(width: 6),
         Text(
           '$title: $percentage%',
-          style: TextStyle(
+          style: const TextStyle(
             color: AppColors.textDark,
             fontSize: 12,
             fontWeight: FontWeight.w500,
@@ -904,7 +867,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
     final totalCalories = mealCalories.values.fold(0.0, (sum, item) => sum + item);
     final mealCategories = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
     final mealColors = [AppColors.breakfast, AppColors.lunch, AppColors.dinner, AppColors.snacks];
-    
+
     return ListView(
       padding: const EdgeInsets.all(20),
       children: [
@@ -929,7 +892,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                               title: percentage >= 5 ? '${percentage.toStringAsFixed(0)}%' : '',
                               color: mealColors[mealCategories.indexOf(category)],
                               radius: 80,
-                              titleStyle: TextStyle(
+                              titleStyle: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: AppColors.textLight,
@@ -986,7 +949,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
         const SizedBox(width: 6),
         Text(
           '$title: $percentage% ($calories kcal)',
-          style: TextStyle(
+          style: const TextStyle(
             color: AppColors.textDark,
             fontSize: 12,
             fontWeight: FontWeight.w500,
@@ -1032,7 +995,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                   const SizedBox(width: 8),
                   Text(
                     title,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: AppColors.textDark,
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -1042,7 +1005,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
               ),
               Text(
                 '${calories.toStringAsFixed(0)} kcal',
-                style: TextStyle(
+                style: const TextStyle(
                   color: AppColors.textDark,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -1070,7 +1033,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
       children: [
         Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             color: AppColors.textMedium,
             fontSize: 12,
           ),
@@ -1112,7 +1075,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
             children: [
               Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   color: AppColors.textDark,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -1175,7 +1138,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
               const SizedBox(width: 10),
               Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   color: AppColors.textMedium,
                   fontSize: 14,
                 ),
@@ -1193,7 +1156,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
           ),
           Text(
             description,
-            style: TextStyle(
+            style: const TextStyle(
               color: AppColors.textMedium,
               fontSize: 12,
             ),
@@ -1211,7 +1174,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.info_outline,
             color: AppColors.textMedium,
             size: 48,
@@ -1219,7 +1182,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
           const SizedBox(height: 10),
           Text(
             message,
-            style: TextStyle(
+            style: const TextStyle(
               color: AppColors.textMedium,
               fontSize: 16,
             ),

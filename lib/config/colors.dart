@@ -54,3 +54,28 @@ const darkColorScheme = ColorScheme(
   error: Color(0xFFEA1505),
   onError: Color(0xFFFFFFFF),
 );
+
+class AppColors {
+  static const Color primary = Color(0xFF297959); // New primary color as requested
+  static const Color primaryLight = Color(0xFF3A8A69); // Lighter shade of primary
+  static const Color primaryDark = Color(0xFF1F5D43); // Darker shade of primary
+  static const Color accent = Color(0xFF4CAF50); // Complementary green
+  static const Color accentLight = Color(0xFF81C784);
+  static const Color textDark = Color(0xFF333333);
+  static const Color textMedium = Color(0xFF666666);
+  static const Color textLight = Color(0xFFFFFFFF);
+  static const Color background = Color(0xFFFFFFFF); // White background as requested
+  static const Color cardBackground = Color(0xFFF5F5F5); // Light grey for cards
+
+  // Chart colors
+  static const Color calories = Color(0xFF297959); // Primary color
+  static const Color protein = Color(0xFF4285F4); // Blue
+  static const Color fat = Color(0xFFFFA000); // Amber
+  static const Color carbs = Color(0xFFDB4437); // Red
+
+  // Meal category colors
+  static const Color breakfast = Color(0xFFFF9800); // Orange
+  static const Color lunch = Color(0xFF4285F4); // Blue
+  static const Color dinner = Color(0xFF297959); // Primary green
+  static const Color snacks = Color(0xFF9C27B0); // Purple
+}
