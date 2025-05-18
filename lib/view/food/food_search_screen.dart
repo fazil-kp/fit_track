@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:fit_track/config/theme.dart';
 import 'package:fit_track/model/food_model.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +47,6 @@ class _FoodSearchScreenState extends ConsumerState<FoodSearchScreen> with Single
     final query = _controller.text.trim();
     if (query.isNotEmpty) {
       ref.read(foodProvider.notifier).searchFoods(query);
-      // Provide haptic feedback
       HapticFeedback.mediumImpact();
     } else {
       // Custom snackbar
@@ -902,11 +903,7 @@ class _FoodSearchScreenState extends ConsumerState<FoodSearchScreen> with Single
   }
 
   Widget _buildDivider() {
-    return Container(
-      height: 30,
-      width: 1,
-      color: Theme.of(context).colorScheme.outlineVariant.withOpacity(0.5),
-    );
+    return Container(height: 30, width: 1, color: Theme.of(context).colorScheme.outlineVariant.withOpacity(0.5));
   }
 
   Widget _buildMainNutrientInfo(

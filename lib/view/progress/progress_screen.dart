@@ -298,7 +298,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
           child: todayNutrition.values.every((v) => v == 0)
               ? _buildEmptyPlaceholder('No nutrition data for today')
               : SizedBox(
-                  height: 220,
+                  height: 200,
                   child: BarChart(
                     BarChartData(
                       alignment: BarChartAlignment.spaceAround,
@@ -306,7 +306,6 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                       barTouchData: BarTouchData(
                         enabled: true,
                         touchTooltipData: BarTouchTooltipData(
-                          // tooltipBgColor: AppColors.primary.withOpacity(0.8),
                           getTooltipItem: (group, groupIndex, rod, rodIndex) {
                             final labels = ['Calories', 'Protein', 'Fat', 'Carbs'];
                             final units = ['kcal', 'g', 'g', 'g'];
@@ -506,7 +505,6 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                       lineTouchData: LineTouchData(
                         enabled: true,
                         touchTooltipData: LineTouchTooltipData(
-                          // tooltipBgColor: AppColors.primary.withOpacity(0.8),
                           getTooltipItems: (touchedSpots) {
                             return touchedSpots.map((spot) {
                               final day = DateFormat('EEE').format(
