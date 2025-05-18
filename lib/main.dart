@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:fit_track/config/colors.dart';
 import 'package:fit_track/helper/fit_track_helper.dart';
 import 'package:fit_track/model/food_model.dart';
