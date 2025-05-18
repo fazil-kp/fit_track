@@ -19,7 +19,7 @@ class BottomNavSection extends StatelessWidget {
         type: BottomNavigationBarType.fixed,
         selectedLabelStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
         unselectedLabelStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
-        items: mainRouteList.map((model) {
+        items: mainRouteList.take(3).map((model) {
           final currentRoute = GoRouterState.of(context).uri.toString();
           final bool isSelected = currentRoute.contains(model.routeName ?? '') || (currentRoute == '/' && model.routeName == home);
           return BottomNavigationBarItem(icon: Padding(padding: const EdgeInsets.only(bottom: 3.0), child: SvgPicture.asset(isSelected ? model.darkSvg ?? '' : model.lightSvg ?? '', color: whiteColor, width: 20, height: 20)), label: model.name ?? '');

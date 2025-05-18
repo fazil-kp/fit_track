@@ -1,6 +1,5 @@
 import 'package:fit_track/helper/constants.dart';
 import 'package:fit_track/route/route_list.dart';
-import 'package:fit_track/route/route_list.dart';
 import 'package:fit_track/view/insight_placeholder.dart';
 import 'package:fit_track/widget/no_route_screen.dart';
 import 'package:flutter/material.dart';

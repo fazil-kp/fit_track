@@ -1,6 +1,5 @@
 import 'package:fit_track/config/colors.dart';
 import 'package:fit_track/config/theme.dart';
-import 'package:fit_track/route/route_list.dart';
 import 'package:fit_track/route/route.dart';
 import 'package:fit_track/route/route_list.dart';
 import 'package:fit_track/view/insight_placeholder.dart';
@@ -507,17 +506,10 @@ class _EmptyMealDisplay extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Image.asset(
-            'assets/images/empty_meal.png', // Add this image to your assets
-            height: 120,
-            fit: BoxFit.contain,
-            errorBuilder: (context, error, stackTrace) {
-              return Icon(
-                Icons.restaurant,
-                size: 80,
-                color: primary.withOpacity(0.5),
-              );
-            },
+          Icon(
+            Icons.restaurant,
+            size: 80,
+            color: primary.withOpacity(0.5),
           ),
           const SizedBox(height: 16),
           const Text(
