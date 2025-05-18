@@ -1,3 +1,4 @@
+import 'package:fit_track/config/colors.dart';
 import 'package:fit_track/helper/extensions.dart';
 import 'package:fit_track/model/meal_log_model.dart';
 import 'package:fit_track/vm/meal_log_vm.dart';
@@ -80,24 +81,28 @@ final mealCategoryMacrosProvider = Provider<Map<String, Map<String, double>>>((r
 
 // Define theme colors
 class AppColors {
-  static const Color primaryDark = Color(0xFF2C3E50);
-  static const Color primaryLight = Color(0xFF34495E);
-  static const Color accent = Color(0xFF3498DB);
-  static const Color accentLight = Color(0xFF5DADE2);
-  static const Color textLight = Color(0xFFF5F5F5);
+  static const Color primary = Color(0xFF297959); // New primary color as requested
+  static const Color primaryLight = Color(0xFF3A8A69); // Lighter shade of primary
+  static const Color primaryDark = Color(0xFF1F5D43); // Darker shade of primary
+  static const Color accent = Color(0xFF4CAF50); // Complementary green
+  static const Color accentLight = Color(0xFF81C784); 
   static const Color textDark = Color(0xFF333333);
+  static const Color textMedium = Color(0xFF666666);
+  static const Color textLight = Color(0xFFFFFFFF);
+  static const Color background = Color(0xFFFFFFFF); // White background as requested
+  static const Color cardBackground = Color(0xFFF5F5F5); // Light grey for cards
 
   // Chart colors
-  static const Color calories = Color(0xFFE74C3C);
-  static const Color protein = Color(0xFF3498DB);
-  static const Color fat = Color(0xFF2ECC71);
-  static const Color carbs = Color(0xFF9B59B6);
+  static const Color calories = Color(0xFF297959); // Primary color
+  static const Color protein = Color(0xFF4285F4); // Blue
+  static const Color fat = Color(0xFFFFA000); // Amber
+  static const Color carbs = Color(0xFFDB4437); // Red
 
   // Meal category colors
-  static const Color breakfast = Color(0xFFFF9800);
-  static const Color lunch = Color(0xFF3498DB);
-  static const Color dinner = Color(0xFF2ECC71);
-  static const Color snacks = Color(0xFF9B59B6);
+  static const Color breakfast = Color(0xFFFF9800); // Orange
+  static const Color lunch = Color(0xFF4285F4); // Blue
+  static const Color dinner = Color(0xFF297959); // Primary green
+  static const Color snacks = Color(0xFF9C27B0); // Purple
 }
 
 class ProgressScreen extends ConsumerStatefulWidget {
@@ -157,13 +162,24 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
     final dateFormatted = DateFormat('MMMM d, y').format(today);
 
     return Scaffold(
-      backgroundColor: AppColors.primaryDark,
+      backgroundColor: AppColors.background, // White background
       body: SafeArea(
         child: Column(
           children: [
             // Custom App Bar
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+              decoration: BoxDecoration(
+                color: AppColors.background,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    spreadRadius: 1,
+                    blurRadius: 3,
+                    offset: const Offset(0, 1),
+                  ),
+                ],
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -173,7 +189,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                       Text(
                         'Nutrition Progress',
                         style: TextStyle(
-                          color: AppColors.textLight,
+                          color: AppColors.textDark,
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                         ),
@@ -181,14 +197,14 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                       Text(
                         '$dayName • $dateFormatted',
                         style: TextStyle(
-                          color: AppColors.textLight.withOpacity(0.8),
+                          color: AppColors.textMedium,
                           fontSize: 14,
                         ),
                       ),
                     ],
                   ),
                   CircleAvatar(
-                    backgroundColor: AppColors.accent,
+                    backgroundColor: AppColors.primary,
                     radius: 22,
                     child: Icon(
                       Icons.person,
@@ -209,14 +225,14 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    AppColors.accent,
-                    AppColors.accentLight,
+                    AppColors.primary,
+                    AppColors.primaryLight,
                   ],
                 ),
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.accent.withOpacity(0.3),
+                    color: AppColors.primary.withOpacity(0.3),
                     blurRadius: 10,
                     offset: const Offset(0, 5),
                   ),
@@ -275,27 +291,30 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
               ),
             ),
 
-            // Custom Tab Bar
             Container(
               margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               decoration: BoxDecoration(
-                color: AppColors.primaryLight,
-                borderRadius: BorderRadius.circular(25),
+                color: AppColors.background,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    spreadRadius: 1,
+                    blurRadius: 3,
+                    offset: const Offset(0, 1),
+                  ),
+                ],
               ),
               child: TabBar(
                 controller: _tabController,
-                indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  color: AppColors.accent,
-                ),
-                labelColor: AppColors.textLight,
-                unselectedLabelColor: AppColors.textLight.withOpacity(0.6),
-                labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+                indicatorColor: AppColors.primary,
+                labelColor: AppColors.primary,
+                unselectedLabelColor: AppColors.textMedium,
                 tabs: const [
-                  Tab(text: 'Overview'),
-                  Tab(text: 'Weekly'),
-                  Tab(text: 'Macros'),
-                  Tab(text: 'Meals'),
+                  Tab(icon: Icon(Icons.insights), text: 'Overview'),
+                  Tab(icon: Icon(Icons.calendar_today), text: 'Weekly'),
+                  Tab(icon: Icon(Icons.fitness_center), text: 'Macros'),
+                  Tab(icon: Icon(Icons.restaurant_menu), text: 'Meals'),
                 ],
               ),
             ),
@@ -399,6 +418,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                       barTouchData: BarTouchData(
                         enabled: true,
                         touchTooltipData: BarTouchTooltipData(
+                          // tooltipBgColor: AppColors.primary.withOpacity(0.8),
                           getTooltipItem: (group, groupIndex, rod, rodIndex) {
                             final labels = ['Calories', 'Protein', 'Fat', 'Carbs'];
                             final units = ['kcal', 'g', 'g', 'g'];
@@ -420,20 +440,20 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                           sideTitles: SideTitles(
                             showTitles: true,
                             getTitlesWidget: (value, meta) {
-                              const style = TextStyle(
-                                color: AppColors.textLight,
+                              final style = TextStyle(
+                                color: AppColors.textDark,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 12,
                               );
                               switch (value.toInt()) {
                                 case 0:
-                                  return const Text('Calories', style: style);
+                                  return Text('Calories', style: style);
                                 case 1:
-                                  return const Text('Protein', style: style);
+                                  return Text('Protein', style: style);
                                 case 2:
-                                  return const Text('Fat', style: style);
+                                  return Text('Fat', style: style);
                                 case 3:
-                                  return const Text('Carbs', style: style);
+                                  return Text('Carbs', style: style);
                                 default:
                                   return const Text('');
                               }
@@ -447,8 +467,8 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                             getTitlesWidget: (value, meta) {
                               return Text(
                                 value.toInt().toString(),
-                                style: const TextStyle(
-                                  color: AppColors.textLight,
+                                style: TextStyle(
+                                  color: AppColors.textDark,
                                   fontSize: 12,
                                 ),
                                 textAlign: TextAlign.center,
@@ -465,7 +485,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                         horizontalInterval: 100,
                         getDrawingHorizontalLine: (value) {
                           return FlLine(
-                            color: AppColors.textLight.withOpacity(0.2),
+                            color: Colors.grey.withOpacity(0.2),
                             strokeWidth: 1,
                           );
                         },
@@ -486,7 +506,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                               backDrawRodData: BackgroundBarChartRodData(
                                 show: true,
                                 toY: 2000, // Target calories
-                                color: AppColors.textLight.withOpacity(0.1),
+                                color: Colors.grey.withOpacity(0.1),
                               ),
                             ),
                           ],
@@ -505,7 +525,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                               backDrawRodData: BackgroundBarChartRodData(
                                 show: true,
                                 toY: 150, // Target protein
-                                color: AppColors.textLight.withOpacity(0.1),
+                                color: Colors.grey.withOpacity(0.1),
                               ),
                             ),
                           ],
@@ -524,7 +544,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                               backDrawRodData: BackgroundBarChartRodData(
                                 show: true,
                                 toY: 65, // Target fat
-                                color: AppColors.textLight.withOpacity(0.1),
+                                color: Colors.grey.withOpacity(0.1),
                               ),
                             ),
                           ],
@@ -543,7 +563,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                               backDrawRodData: BackgroundBarChartRodData(
                                 show: true,
                                 toY: 250, // Target carbs
-                                color: AppColors.textLight.withOpacity(0.1),
+                                color: Colors.grey.withOpacity(0.1),
                               ),
                             ),
                           ],
@@ -598,6 +618,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                       lineTouchData: LineTouchData(
                         enabled: true,
                         touchTooltipData: LineTouchTooltipData(
+                          // tooltipBgColor: AppColors.primary.withOpacity(0.8),
                           getTooltipItems: (touchedSpots) {
                             return touchedSpots.map((spot) {
                               final day = DateFormat('EEE').format(
@@ -623,7 +644,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                         horizontalInterval: 500,
                         getDrawingHorizontalLine: (value) {
                           return FlLine(
-                            color: AppColors.textLight.withOpacity(0.2),
+                            color: Colors.grey.withOpacity(0.2),
                             strokeWidth: 1,
                           );
                         },
@@ -642,8 +663,8 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                                 padding: const EdgeInsets.only(top: 8.0),
                                 child: Text(
                                   day,
-                                  style: const TextStyle(
-                                    color: AppColors.textLight,
+                                  style: TextStyle(
+                                    color: AppColors.textDark,
                                     fontSize: 12,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -659,8 +680,8 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                             getTitlesWidget: (value, meta) {
                               return Text(
                                 value.toInt().toString(),
-                                style: const TextStyle(
-                                  color: AppColors.textLight,
+                                style: TextStyle(
+                                  color: AppColors.textDark,
                                   fontSize: 12,
                                 ),
                               );
@@ -675,25 +696,25 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                         LineChartBarData(
                           spots: weeklyCalories.asMap().entries.map((e) => FlSpot(e.key.toDouble(), e.value)).toList(),
                           isCurved: true,
-                          color: AppColors.calories,
+                          color: AppColors.primary,
                           barWidth: 4,
                           isStrokeCapRound: true,
                           dotData: FlDotData(
                             show: true,
                             getDotPainter: (spot, percent, barData, index) => FlDotCirclePainter(
                               radius: 6,
-                              color: AppColors.calories,
+                              color: AppColors.primary,
                               strokeWidth: 2,
                               strokeColor: AppColors.textLight,
                             ),
                           ),
                           belowBarData: BarAreaData(
                             show: true,
-                            color: AppColors.calories.withOpacity(0.2),
+                            color: AppColors.primary.withOpacity(0.2),
                             gradient: LinearGradient(
                               colors: [
-                                AppColors.calories.withOpacity(0.4),
-                                AppColors.calories.withOpacity(0.0),
+                                AppColors.primary.withOpacity(0.4),
+                                AppColors.primary.withOpacity(0.0),
                               ],
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
@@ -713,7 +734,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
           value: weeklyCalories.isEmpty ? '0' : (weeklyCalories.reduce((a, b) => a + b) / weeklyCalories.length).toStringAsFixed(0),
           description: 'calories per day',
           icon: Icons.calendar_today,
-          color: AppColors.calories,
+          color: AppColors.primary,
           isLarge: true,
         ),
         const SizedBox(height: 15),
@@ -725,7 +746,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                 value: weeklyCalories.isEmpty ? '0' : weeklyCalories.reduce((a, b) => a > b ? a : b).toStringAsFixed(0),
                 description: 'calories',
                 icon: Icons.arrow_upward,
-                color: AppColors.calories,
+                color: AppColors.fat,
               ),
             ),
             const SizedBox(width: 15),
@@ -735,7 +756,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                 value: weeklyCalories.isEmpty || weeklyCalories.every((e) => e == 0) ? '0' : weeklyCalories.where((e) => e > 0).reduce((a, b) => a < b ? a : b).toStringAsFixed(0),
                 description: 'calories',
                 icon: Icons.arrow_downward,
-                color: AppColors.calories,
+                color: AppColors.protein,
               ),
             ),
           ],
@@ -743,14 +764,13 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
       ],
     );
   }
-
-// Macros Page Content
+// Macros Page Content - continuing from where the code was cut off
   Widget _buildMacrosPage(double totalProtein, double totalCarbs, double totalFat) {
     final totalMacros = totalProtein + totalCarbs + totalFat;
     final proteinPercentage = totalMacros > 0 ? (totalProtein / totalMacros * 100).toStringAsFixed(1) : '0';
     final carbsPercentage = totalMacros > 0 ? (totalCarbs / totalMacros * 100).toStringAsFixed(1) : '0';
     final fatPercentage = totalMacros > 0 ? (totalFat / totalMacros * 100).toStringAsFixed(1) : '0';
-
+    
     return ListView(
       padding: const EdgeInsets.all(20),
       children: [
@@ -758,77 +778,73 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
           title: 'Macronutrient Distribution',
           icon: Icons.pie_chart,
           child: totalMacros == 0
-              ? _buildEmptyPlaceholder('No macronutrient data')
-              : SizedBox(
-                  height: 250,
-                  child: PieChart(
-                    PieChartData(
-                      pieTouchData: PieTouchData(
-                        touchCallback: (FlTouchEvent event, pieTouchResponse) {},
-                        enabled: true,
+              ? _buildEmptyPlaceholder('No macronutrient data for today')
+              : Column(
+                  children: [
+                    SizedBox(
+                      height: 220,
+                      child: PieChart(
+                        PieChartData(
+                          sectionsSpace: 2,
+                          centerSpaceRadius: 40,
+                          sections: [
+                            PieChartSectionData(
+                              value: totalProtein,
+                              title: '$proteinPercentage%',
+                              color: AppColors.protein,
+                              radius: 80,
+                              titleStyle: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.textLight,
+                              ),
+                            ),
+                            PieChartSectionData(
+                              value: totalCarbs,
+                              title: '$carbsPercentage%',
+                              color: AppColors.carbs,
+                              radius: 80,
+                              titleStyle: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.textLight,
+                              ),
+                            ),
+                            PieChartSectionData(
+                              value: totalFat,
+                              title: '$fatPercentage%',
+                              color: AppColors.fat,
+                              radius: 80,
+                              titleStyle: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.textLight,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      sectionsSpace: 2,
-                      centerSpaceRadius: 50,
-                      sections: [
-                        PieChartSectionData(
-                          color: AppColors.protein,
-                          value: totalProtein,
-                          title: '$proteinPercentage%',
-                          radius: 80,
-                          titleStyle: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.textLight,
-                          ),
-                        ),
-                        PieChartSectionData(
-                          color: AppColors.carbs,
-                          value: totalCarbs,
-                          title: '$carbsPercentage%',
-                          radius: 80,
-                          titleStyle: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.textLight,
-                          ),
-                        ),
-                        PieChartSectionData(
-                          color: AppColors.fat,
-                          value: totalFat,
-                          title: '$fatPercentage%',
-                          radius: 80,
-                          titleStyle: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.textLight,
-                          ),
-                        ),
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        _buildMacroLegendItem('Protein', AppColors.protein, proteinPercentage),
+                        _buildMacroLegendItem('Carbs', AppColors.carbs, carbsPercentage),
+                        _buildMacroLegendItem('Fat', AppColors.fat, fatPercentage),
                       ],
                     ),
-                  ),
+                  ],
                 ),
         ),
-        const SizedBox(height: 20),
-        // Legend
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _buildLegendItem('Protein', AppColors.protein),
-            const SizedBox(width: 20),
-            _buildLegendItem('Carbs', AppColors.carbs),
-            const SizedBox(width: 20),
-            _buildLegendItem('Fat', AppColors.fat),
-          ],
-        ),
-        const SizedBox(height: 20),
-        // Macro details
+        const SizedBox(height: 15),
         Row(
           children: [
             Expanded(
               child: _buildInfoCard(
-                title: 'Protein',
-                value: '${totalProtein.toStringAsFixed(0)}g',
-                description: '$proteinPercentage% of total',
+                title: 'Protein Goal',
+                value: '${(totalProtein / 150 * 100).toStringAsFixed(0)}%',
+                description: '${totalProtein.toStringAsFixed(0)}g of 150g',
                 icon: Icons.fitness_center,
                 color: AppColors.protein,
               ),
@@ -836,9 +852,9 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
             const SizedBox(width: 15),
             Expanded(
               child: _buildInfoCard(
-                title: 'Carbs',
-                value: '${totalCarbs.toStringAsFixed(0)}g',
-                description: '$carbsPercentage% of total',
+                title: 'Carbs Goal',
+                value: '${(totalCarbs / 250 * 100).toStringAsFixed(0)}%',
+                description: '${totalCarbs.toStringAsFixed(0)}g of 250g',
                 icon: Icons.grain,
                 color: AppColors.carbs,
               ),
@@ -847,9 +863,9 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
         ),
         const SizedBox(height: 15),
         _buildInfoCard(
-          title: 'Fat',
-          value: '${totalFat.toStringAsFixed(0)}g',
-          description: '$fatPercentage% of total',
+          title: 'Fat Goal',
+          value: '${(totalFat / 65 * 100).toStringAsFixed(0)}%',
+          description: '${totalFat.toStringAsFixed(0)}g of 65g',
           icon: Icons.opacity,
           color: AppColors.fat,
           isLarge: true,
@@ -858,13 +874,13 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
     );
   }
 
-// Legend item for pie chart
-  Widget _buildLegendItem(String title, Color color) {
+  // Macro legend item
+  Widget _buildMacroLegendItem(String title, Color color, String percentage) {
     return Row(
       children: [
         Container(
-          width: 16,
-          height: 16,
+          width: 12,
+          height: 12,
           decoration: BoxDecoration(
             color: color,
             shape: BoxShape.circle,
@@ -872,10 +888,10 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
         ),
         const SizedBox(width: 6),
         Text(
-          title,
+          '$title: $percentage%',
           style: TextStyle(
-            color: AppColors.textLight,
-            fontSize: 14,
+            color: AppColors.textDark,
+            fontSize: 12,
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -883,184 +899,117 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
     );
   }
 
-// Meals Page Content
-  Widget _buildMealsPage(Map<String, double> mealCategoryCalories, Map<String, Map<String, double>> mealCategoryMacros) {
-    final hasMealData = mealCategoryCalories.values.any((value) => value > 0);
-
+  // Meals Page Content
+  Widget _buildMealsPage(Map<String, double> mealCalories, Map<String, Map<String, double>> mealMacros) {
+    final totalCalories = mealCalories.values.fold(0.0, (sum, item) => sum + item);
+    final mealCategories = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
+    final mealColors = [AppColors.breakfast, AppColors.lunch, AppColors.dinner, AppColors.snacks];
+    
     return ListView(
       padding: const EdgeInsets.all(20),
       children: [
         _buildChartCard(
-          title: 'Calories by Meal',
-          icon: Icons.restaurant,
-          child: !hasMealData
-              ? _buildEmptyPlaceholder('No meal data recorded')
-              : SizedBox(
-                  height: 250,
-                  child: BarChart(
-                    BarChartData(
-                      alignment: BarChartAlignment.spaceAround,
-                      maxY: mealCategoryCalories.values.isEmpty ? 1000 : mealCategoryCalories.values.reduce((a, b) => a > b ? a : b) * 1.2,
-                      barTouchData: BarTouchData(
-                        enabled: true,
-                        touchTooltipData: BarTouchTooltipData(
-                          getTooltipItem: (group, groupIndex, rod, rodIndex) {
-                            final categories = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
-                            final value = rod.toY.toStringAsFixed(0);
-                            return BarTooltipItem(
-                              '${categories[group.x]}\n$value kcal',
-                              TextStyle(
-                                color: AppColors.textLight,
+          title: 'Meal Distribution',
+          icon: Icons.restaurant_menu,
+          child: totalCalories == 0
+              ? _buildEmptyPlaceholder('No meal data for today')
+              : Column(
+                  children: [
+                    SizedBox(
+                      height: 220,
+                      child: PieChart(
+                        PieChartData(
+                          sectionsSpace: 2,
+                          centerSpaceRadius: 40,
+                          sections: mealCategories.map((category) {
+                            final calories = mealCalories[category] ?? 0.0;
+                            final percentage = totalCalories > 0 ? (calories / totalCalories * 100) : 0.0;
+                            return PieChartSectionData(
+                              value: calories,
+                              title: percentage >= 5 ? '${percentage.toStringAsFixed(0)}%' : '',
+                              color: mealColors[mealCategories.indexOf(category)],
+                              radius: 80,
+                              titleStyle: TextStyle(
+                                fontSize: 16,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 14,
+                                color: AppColors.textLight,
                               ),
                             );
-                          },
+                          }).toList(),
                         ),
                       ),
-                      titlesData: FlTitlesData(
-                        show: true,
-                        bottomTitles: AxisTitles(
-                          sideTitles: SideTitles(
-                            showTitles: true,
-                            getTitlesWidget: (value, meta) {
-                              const style = TextStyle(
-                                color: AppColors.textLight,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                              );
-                              switch (value.toInt()) {
-                                case 0:
-                                  return const Text('Breakfast', style: style);
-                                case 1:
-                                  return const Text('Lunch', style: style);
-                                case 2:
-                                  return const Text('Dinner', style: style);
-                                case 3:
-                                  return const Text('Snacks', style: style);
-                                default:
-                                  return const Text('');
-                              }
-                            },
-                          ),
-                        ),
-                        leftTitles: AxisTitles(
-                          sideTitles: SideTitles(
-                            showTitles: true,
-                            reservedSize: 40,
-                            getTitlesWidget: (value, meta) {
-                              return Text(
-                                value.toInt().toString(),
-                                style: const TextStyle(
-                                  color: AppColors.textLight,
-                                  fontSize: 12,
-                                ),
-                                textAlign: TextAlign.center,
-                              );
-                            },
-                          ),
-                        ),
-                        topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                        rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                      ),
-                      gridData: FlGridData(
-                        show: true,
-                        drawVerticalLine: false,
-                        horizontalInterval: 100,
-                        getDrawingHorizontalLine: (value) {
-                          return FlLine(
-                            color: AppColors.textLight.withOpacity(0.2),
-                            strokeWidth: 1,
-                          );
-                        },
-                      ),
-                      borderData: FlBorderData(show: false),
-                      barGroups: [
-                        BarChartGroupData(
-                          x: 0,
-                          barRods: [
-                            BarChartRodData(
-                              toY: mealCategoryCalories['Breakfast'] ?? 0,
-                              color: AppColors.breakfast,
-                              width: 20,
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(6),
-                                topRight: Radius.circular(6),
-                              ),
-                            ),
-                          ],
-                        ),
-                        BarChartGroupData(
-                          x: 1,
-                          barRods: [
-                            BarChartRodData(
-                              toY: mealCategoryCalories['Lunch'] ?? 0,
-                              color: AppColors.lunch,
-                              width: 20,
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(6),
-                                topRight: Radius.circular(6),
-                              ),
-                            ),
-                          ],
-                        ),
-                        BarChartGroupData(
-                          x: 2,
-                          barRods: [
-                            BarChartRodData(
-                              toY: mealCategoryCalories['Dinner'] ?? 0,
-                              color: AppColors.dinner,
-                              width: 20,
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(6),
-                                topRight: Radius.circular(6),
-                              ),
-                            ),
-                          ],
-                        ),
-                        BarChartGroupData(
-                          x: 3,
-                          barRods: [
-                            BarChartRodData(
-                              toY: mealCategoryCalories['Snacks'] ?? 0,
-                              color: AppColors.snacks,
-                              width: 20,
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(6),
-                                topRight: Radius.circular(6),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
                     ),
-                  ),
+                    const SizedBox(height: 20),
+                    Wrap(
+                      spacing: 20,
+                      runSpacing: 10,
+                      alignment: WrapAlignment.center,
+                      children: List.generate(mealCategories.length, (index) {
+                        final category = mealCategories[index];
+                        final calories = mealCalories[category] ?? 0.0;
+                        final percentage = totalCalories > 0 ? (calories / totalCalories * 100) : 0.0;
+                        return _buildMealLegendItem(
+                          category,
+                          mealColors[index],
+                          percentage.toStringAsFixed(0),
+                          calories.toStringAsFixed(0),
+                        );
+                      }),
+                    ),
+                  ],
                 ),
         ),
         const SizedBox(height: 15),
-        _buildMealDetails('Breakfast', mealCategoryCalories['Breakfast'] ?? 0, mealCategoryMacros['Breakfast']!, AppColors.breakfast),
-        const SizedBox(height: 15),
-        _buildMealDetails('Lunch', mealCategoryCalories['Lunch'] ?? 0, mealCategoryMacros['Lunch']!, AppColors.lunch),
-        const SizedBox(height: 15),
-        _buildMealDetails('Dinner', mealCategoryCalories['Dinner'] ?? 0, mealCategoryMacros['Dinner']!, AppColors.dinner),
-        const SizedBox(height: 15),
-        _buildMealDetails('Snacks', mealCategoryCalories['Snacks'] ?? 0, mealCategoryMacros['Snacks']!, AppColors.snacks),
+        ...mealCategories.map((category) => _buildMealDetailCard(
+              category,
+              mealColors[mealCategories.indexOf(category)],
+              mealCalories[category] ?? 0.0,
+              mealMacros[category] ?? {'protein': 0.0, 'fat': 0.0, 'carbs': 0.0},
+            )),
       ],
     );
   }
 
-// Meal details card
-  Widget _buildMealDetails(String mealName, double calories, Map<String, double> macros, Color color) {
+  // Meal legend item
+  Widget _buildMealLegendItem(String title, Color color, String percentage, String calories) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 12,
+          height: 12,
+          decoration: BoxDecoration(
+            color: color,
+            shape: BoxShape.circle,
+          ),
+        ),
+        const SizedBox(width: 6),
+        Text(
+          '$title: $percentage% ($calories kcal)',
+          style: TextStyle(
+            color: AppColors.textDark,
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
+    );
+  }
+
+  // Meal detail card
+  Widget _buildMealDetailCard(String title, Color color, double calories, Map<String, double> macros) {
     return Container(
+      margin: const EdgeInsets.only(bottom: 15),
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: AppColors.primaryLight,
-        borderRadius: BorderRadius.circular(16),
+        color: AppColors.cardBackground,
+        borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 3,
+            offset: const Offset(0, 1),
           ),
         ],
       ),
@@ -1073,8 +1022,8 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
               Row(
                 children: [
                   Container(
-                    width: 12,
-                    height: 12,
+                    width: 16,
+                    height: 16,
                     decoration: BoxDecoration(
                       color: color,
                       shape: BoxShape.circle,
@@ -1082,9 +1031,9 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    mealName,
+                    title,
                     style: TextStyle(
-                      color: AppColors.textLight,
+                      color: AppColors.textDark,
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
@@ -1094,9 +1043,9 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
               Text(
                 '${calories.toStringAsFixed(0)} kcal',
                 style: TextStyle(
-                  color: AppColors.textLight.withOpacity(0.8),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
+                  color: AppColors.textDark,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ],
@@ -1105,9 +1054,9 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildMacroDetail('Protein', '${macros['protein']?.toStringAsFixed(0) ?? "0"}g', AppColors.protein),
-              _buildMacroDetail('Carbs', '${macros['carbs']?.toStringAsFixed(0) ?? "0"}g', AppColors.carbs),
-              _buildMacroDetail('Fat', '${macros['fat']?.toStringAsFixed(0) ?? "0"}g', AppColors.fat),
+              _buildMacroItem('Protein', macros['protein'] ?? 0.0, AppColors.protein),
+              _buildMacroItem('Carbs', macros['carbs'] ?? 0.0, AppColors.carbs),
+              _buildMacroItem('Fat', macros['fat'] ?? 0.0, AppColors.fat),
             ],
           ),
         ],
@@ -1115,20 +1064,20 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
     );
   }
 
-// Macro detail for meal card
-  Widget _buildMacroDetail(String title, String value, Color color) {
+  // Macro item
+  Widget _buildMacroItem(String title, double value, Color color) {
     return Column(
       children: [
         Text(
           title,
           style: TextStyle(
-            color: AppColors.textLight.withOpacity(0.7),
+            color: AppColors.textMedium,
             fontSize: 12,
           ),
         ),
         const SizedBox(height: 4),
         Text(
-          value,
+          '${value.toStringAsFixed(0)}g',
           style: TextStyle(
             color: color,
             fontSize: 14,
@@ -1139,18 +1088,19 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
     );
   }
 
-// Chart card widget
+  // Chart card container
   Widget _buildChartCard({required String title, required IconData icon, required Widget child}) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: AppColors.primaryLight,
-        borderRadius: BorderRadius.circular(16),
+        color: AppColors.cardBackground,
+        borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 3,
+            offset: const Offset(0, 1),
           ),
         ],
       ),
@@ -1163,26 +1113,26 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
               Text(
                 title,
                 style: TextStyle(
-                  color: AppColors.textLight,
+                  color: AppColors.textDark,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Icon(
                 icon,
-                color: AppColors.textLight.withOpacity(0.8),
-                size: 20,
+                color: AppColors.primary,
+                size: 24,
               ),
             ],
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 15),
           child,
         ],
       ),
     );
   }
 
-// Info card widget
+  // Information card
   Widget _buildInfoCard({
     required String title,
     required String value,
@@ -1194,69 +1144,58 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
     return Container(
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: AppColors.primaryLight,
-        borderRadius: BorderRadius.circular(16),
+        color: AppColors.cardBackground,
+        borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 3,
+            offset: const Offset(0, 1),
           ),
         ],
       ),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: 45,
-            height: 45,
-            decoration: BoxDecoration(
-              color: color.withOpacity(0.2),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              icon,
-              color: color,
-              size: 24,
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: color.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(
+                  icon,
+                  color: color,
+                  size: 20,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Text(
+                title,
+                style: TextStyle(
+                  color: AppColors.textMedium,
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Text(
+            value,
+            style: TextStyle(
+              color: AppColors.textDark,
+              fontSize: isLarge ? 32 : 24,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(width: 15),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    color: AppColors.textLight.withOpacity(0.7),
-                    fontSize: 14,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      value,
-                      style: TextStyle(
-                        color: AppColors.textLight,
-                        fontSize: isLarge ? 24 : 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(width: 5),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 4),
-                      child: Text(
-                        description,
-                        style: TextStyle(
-                          color: AppColors.textLight.withOpacity(0.6),
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+          Text(
+            description,
+            style: TextStyle(
+              color: AppColors.textMedium,
+              fontSize: 12,
             ),
           ),
         ],
@@ -1264,29 +1203,29 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
     );
   }
 
-// Empty placeholder for charts
+  // Empty placeholder
   Widget _buildEmptyPlaceholder(String message) {
-    return SizedBox(
+    return Container(
       height: 200,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.bar_chart,
-              color: AppColors.textLight.withOpacity(0.3),
-              size: 60,
+      alignment: Alignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.info_outline,
+            color: AppColors.textMedium,
+            size: 48,
+          ),
+          const SizedBox(height: 10),
+          Text(
+            message,
+            style: TextStyle(
+              color: AppColors.textMedium,
+              fontSize: 16,
             ),
-            const SizedBox(height: 16),
-            Text(
-              message,
-              style: TextStyle(
-                color: AppColors.textLight.withOpacity(0.6),
-                fontSize: 16,
-              ),
-            ),
-          ],
-        ),
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
     );
   }
