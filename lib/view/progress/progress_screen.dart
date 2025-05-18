@@ -201,10 +201,10 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
             labelColor: AppColors.primary,
             unselectedLabelColor: AppColors.textMedium,
             tabs: const [
-              Tab(icon: Icon(Icons.insights), text: 'Overview'),
               Tab(icon: Icon(Icons.calendar_today), text: 'Weekly'),
               Tab(icon: Icon(Icons.fitness_center), text: 'Macros'),
               Tab(icon: Icon(Icons.restaurant_menu), text: 'Meals'),
+              Tab(icon: Icon(Icons.insights), text: 'Overview'),
             ],
           ),
         ),
@@ -220,9 +220,6 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
               });
             },
             children: [
-              // Overview Page
-              _buildOverviewPage(todayNutrition),
-
               // Weekly Page
               _buildWeeklyPage(weeklyCalories),
 
@@ -231,6 +228,8 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
 
               // Meals Page
               _buildMealsPage(mealCategoryCalories, mealCategoryMacros),
+              // Overview Page
+              _buildOverviewPage(todayNutrition),
             ],
           ),
         ),
@@ -298,7 +297,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> with SingleTick
           child: todayNutrition.values.every((v) => v == 0)
               ? _buildEmptyPlaceholder('No nutrition data for today')
               : SizedBox(
-                  height: 200,
+                  height: 220,
                   child: BarChart(
                     BarChartData(
                       alignment: BarChartAlignment.spaceAround,
