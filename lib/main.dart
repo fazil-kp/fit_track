@@ -5,11 +5,13 @@ import 'package:fit_track/model/food_model.dart';
 import 'package:fit_track/model/meal_log_model.dart';
 import 'package:fit_track/route/route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/adapters.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
   await Hive.initFlutter();
   Hive.registerAdapter(FoodAdapter());
   Hive.registerAdapter(MealLogAdapter());

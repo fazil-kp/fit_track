@@ -1,20 +1,21 @@
 import 'package:dio/dio.dart';
 import 'package:fit_track/model/food_model.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final apiServiceProvider = Provider<ApiService>((ref) => ApiService());
 
 class ApiService {
-  final Dio _dio = Dio();
-  static const String _baseUrl = 'https://api.calorieninjas.com/v1/nutrition';
-  static const String _apiKey = 'JtNxkJ1JDdonSNvO9iqGJw==Psuzv4GDqHWUt02M';
+  final Dio dio = Dio();
+  final String baseUrl = dotenv.env['BASE_URL']!;
+  final String apiKey = dotenv.env['CALORIE_NINJAS_API_KEY']!;
 
   Future<List<Food>> searchFood(String query) async {
     try {
-      final response = await _dio.get(
-        '$_baseUrl?query=${Uri.encodeQueryComponent(query.trim())}',
+      final response = await dio.get(
+        '$baseUrl?query=${Uri.encodeQueryComponent(query.trim())}',
         options: Options(
-          headers: {'X-Api-Key': _apiKey},
+          headers: {'X-Api-Key': apiKey},
           validateStatus: (status) => status != null && status < 500,
         ),
       );
