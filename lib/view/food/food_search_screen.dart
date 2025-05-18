@@ -179,7 +179,7 @@ class _FoodSearchScreenState extends ConsumerState<FoodSearchScreen> with Single
                           Text(
                             'Find Your Food',
                             style: theme.textTheme.headlineMedium?.copyWith(
-                              color: colorScheme.primary,
+                              color: primary,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -233,7 +233,7 @@ class _FoodSearchScreenState extends ConsumerState<FoodSearchScreen> with Single
                                       hintText: 'Search for salad, apple, etc..',
                                       border: InputBorder.none,
                                       hintStyle: TextStyle(color: colorScheme.onSurface.withOpacity(0.6)),
-                                      prefixIcon: Icon(Icons.restaurant_menu, color: colorScheme.primary),
+                                      prefixIcon: Icon(Icons.restaurant_menu, color: primary),
                                     ),
                                     style: TextStyle(color: colorScheme.onSurface),
                                     onSubmitted: (_) => _searchFoods(),
@@ -245,7 +245,7 @@ class _FoodSearchScreenState extends ConsumerState<FoodSearchScreen> with Single
                                 width: 40,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(12),
-                                  color: colorScheme.primary,
+                                  color: primary,
                                 ),
                                 child: IconButton(
                                   padding: EdgeInsets.zero,
@@ -290,7 +290,7 @@ class _FoodSearchScreenState extends ConsumerState<FoodSearchScreen> with Single
                         ElevatedButton.icon(
                           onPressed: _addToFoodLog,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: colorScheme.primary,
+                            backgroundColor: primary,
                             foregroundColor: colorScheme.onPrimary,
                             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                             shape: RoundedRectangleBorder(
@@ -316,7 +316,7 @@ class _FoodSearchScreenState extends ConsumerState<FoodSearchScreen> with Single
                                   Icon(
                                     Icons.search_off,
                                     size: 80,
-                                    color: colorScheme.primary.withOpacity(0.3),
+                                    color: primary.withOpacity(0.3),
                                   ),
                                   const SizedBox(height: 16),
                                   Text(
@@ -395,13 +395,13 @@ class _FoodSearchScreenState extends ConsumerState<FoodSearchScreen> with Single
                                                 width: 50,
                                                 height: 50,
                                                 decoration: BoxDecoration(
-                                                  color: colorScheme.primary.withOpacity(0.1),
+                                                  color: primary.withOpacity(0.1),
                                                   borderRadius: BorderRadius.circular(12),
                                                 ),
                                                 child: Center(
                                                   child: Icon(
                                                     _getFoodIcon(food.label ?? ""),
-                                                    color: colorScheme.primary,
+                                                    color: primary,
                                                     size: 28,
                                                   ),
                                                 ),
@@ -461,7 +461,7 @@ class _FoodSearchScreenState extends ConsumerState<FoodSearchScreen> with Single
                                                   scale: 1.1,
                                                   child: Checkbox(
                                                     value: isSelected,
-                                                    activeColor: colorScheme.primary,
+                                                    activeColor: primary,
                                                     onChanged: (value) {
                                                       setState(() {
                                                         if (value == true) {
@@ -545,11 +545,11 @@ class _FoodSearchScreenState extends ConsumerState<FoodSearchScreen> with Single
                               },
                               icon: Icon(
                                 e.toString().contains('Unauthorized') ? Icons.settings : Icons.refresh,
-                                color: colorScheme.primary,
+                                color: primary,
                               ),
                               label: Text(
                                 e.toString().contains('Unauthorized') ? 'Go to Settings' : 'Try Again',
-                                style: TextStyle(color: colorScheme.primary),
+                                style: TextStyle(color: primary),
                               ),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: colorScheme.surface,
@@ -671,13 +671,13 @@ class _FoodSearchScreenState extends ConsumerState<FoodSearchScreen> with Single
                   width: 60,
                   height: 60,
                   decoration: BoxDecoration(
-                    color: colorScheme.primary.withOpacity(0.1),
+                    color: primary.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Center(
                     child: Icon(
                       _getFoodIcon(food.label ?? ""),
-                      color: colorScheme.primary,
+                      color: primary,
                       size: 36,
                     ),
                   ),
@@ -717,7 +717,7 @@ class _FoodSearchScreenState extends ConsumerState<FoodSearchScreen> with Single
                     icon: const Icon(Icons.add, size: 18, color: Colors.white),
                     label: Text('Add', style: context.bodySmall?.copyWith(color: Colors.white, fontSize: 14)),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: colorScheme.primary,
+                      backgroundColor: primary,
                       foregroundColor: colorScheme.onPrimary,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -801,7 +801,7 @@ class _FoodSearchScreenState extends ConsumerState<FoodSearchScreen> with Single
                         'Detailed Nutrition Information',
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.bold,
-                              color: colorScheme.primary,
+                              color: primary,
                             ),
                       ),
                     ),
