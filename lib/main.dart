@@ -11,6 +11,8 @@ import 'package:hive_flutter/adapters.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  //Todo:
+  //! For interview purposes, the .env file is NOT added to .gitignore
   await dotenv.load(fileName: ".env");
   await Hive.initFlutter();
   Hive.registerAdapter(FoodAdapter());
