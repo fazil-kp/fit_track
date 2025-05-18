@@ -229,7 +229,7 @@ class _FoodSearchScreenState extends ConsumerState<FoodSearchScreen> with Single
                                   child: TextField(
                                     controller: _controller,
                                     decoration: InputDecoration(
-                                      hintText: 'Search for fruits, meals, snacks...',
+                                      hintText: 'Search for salad, apple, etc..',
                                       border: InputBorder.none,
                                       hintStyle: TextStyle(color: colorScheme.onSurface.withOpacity(0.6)),
                                       prefixIcon: Icon(Icons.restaurant_menu, color: colorScheme.primary),
