@@ -1,5 +1,5 @@
 import 'package:fit_track/config/colors.dart';
-import 'package:fit_track/route/bottom_routes.dart';
+import 'package:fit_track/route/route_list.dart';
 import 'package:fit_track/route/route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -19,12 +19,12 @@ class BottomNavSection extends StatelessWidget {
         type: BottomNavigationBarType.fixed,
         selectedLabelStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
         unselectedLabelStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
-        items: bottomNavRouteList.map((model) {
+        items: mainRouteList.map((model) {
           final currentRoute = GoRouterState.of(context).uri.toString();
           final bool isSelected = currentRoute.contains(model.routeName ?? '') || (currentRoute == '/' && model.routeName == home);
           return BottomNavigationBarItem(icon: Padding(padding: const EdgeInsets.only(bottom: 3.0), child: SvgPicture.asset(isSelected ? model.darkSvg ?? '' : model.lightSvg ?? '', color: whiteColor, width: 20, height: 20)), label: model.name ?? '');
         }).toList(),
-        onTap: (index) => routeX.goNamed(bottomNavRouteList[index].routeName ?? home),
+        onTap: (index) => routeX.goNamed(mainRouteList[index].routeName ?? home),
       ),
     );
   }

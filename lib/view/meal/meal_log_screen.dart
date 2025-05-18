@@ -1,5 +1,6 @@
 import 'package:fit_track/config/colors.dart';
 import 'package:fit_track/config/theme.dart';
+import 'package:fit_track/route/route_list.dart';
 import 'package:fit_track/route/route.dart';
 import 'package:fit_track/route/route_list.dart';
 import 'package:fit_track/view/insight_placeholder.dart';
@@ -49,7 +50,7 @@ class MealLogScreen extends ConsumerWidget {
 
     return FitTrackPlaceHolder(
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => routeX.pushNamed(searchMain),
+        onPressed: () => routeX.pushNamed(home),
         backgroundColor: primary,
         icon: const Icon(Icons.add_circle, color: Colors.white),
         label: Text("Add Meal", style: context.bodySmall?.copyWith(fontSize: 14, color: Colors.white)),
@@ -537,7 +538,7 @@ class _EmptyMealDisplay extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           ElevatedButton(
-            onPressed: () => routeX.pushNamed(searchMain),
+            onPressed: () => routeX.pushNamed(home),
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               shape: RoundedRectangleBorder(
