@@ -23,7 +23,6 @@ dependencies:
   intl: ^0.20.2
   json_annotation: ^4.9.0
   fl_chart: ^0.71.0
-  flutter_dotenv: ^5.2.1
 
 dev_dependencies:
   flutter_test:
