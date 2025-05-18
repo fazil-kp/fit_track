@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:fit_track/config/colors.dart';
 import 'package:fit_track/config/theme.dart';
 import 'package:fit_track/model/food_model.dart';
 import 'package:flutter/material.dart';
@@ -85,11 +86,11 @@ class _FoodSearchScreenState extends ConsumerState<FoodSearchScreen> with Single
           backgroundColor: Theme.of(context).colorScheme.primaryContainer,
           content: Row(
             children: [
-              Icon(Icons.check_circle, color: Theme.of(context).colorScheme.onPrimaryContainer),
+              Icon(Icons.check_circle, color: primary),
               const SizedBox(width: 12),
               Text(
                 '${_selectedFoods.length} items added to food log',
-                style: TextStyle(color: Theme.of(context).colorScheme.onPrimaryContainer),
+                style: TextStyle(color: primary),
               ),
             ],
           ),

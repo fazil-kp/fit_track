@@ -21,10 +21,10 @@ class BottomNavSection extends StatelessWidget {
         unselectedLabelStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
         items: bottomNavRouteList.map((model) {
           final currentRoute = GoRouterState.of(context).uri.toString();
-          final bool isSelected = currentRoute.contains(model.routeName ?? '') || (currentRoute == '/' && model.routeName == food);
+          final bool isSelected = currentRoute.contains(model.routeName ?? '') || (currentRoute == '/' && model.routeName == home);
           return BottomNavigationBarItem(icon: Padding(padding: const EdgeInsets.only(bottom: 3.0), child: SvgPicture.asset(isSelected ? model.darkSvg ?? '' : model.lightSvg ?? '', color: whiteColor, width: 20, height: 20)), label: model.name ?? '');
         }).toList(),
-        onTap: (index) => routeX.goNamed(bottomNavRouteList[index].routeName ?? food),
+        onTap: (index) => routeX.goNamed(bottomNavRouteList[index].routeName ?? home),
       ),
     );
   }
